@@ -15,7 +15,7 @@ int main()
    cin>>max;
 
   int count =  CalculatePrimes(min,max);
-  cout<<"There are total "<<count<<" primes."<<endl;
+  cout<<"\nThere are total "<<count<<" primes."<<endl;
   return 0;
 }
 
@@ -36,15 +36,9 @@ int CalculatePrimes(const unsigned int min,const unsigned int max)
   {
     for(j=2;j<=sqrt(i);j++)
     {
-      cout<<"j is" <<j<<endl;
-      cout<<"sqrt(i) is "<<sqrt(i)<<endl;
-      if(i%j==0)// break;
-      {
-//        cout<<i <<"is divided by "<<j<<endl;
-        break;
-      }
+      if(i%j==0) break;
     }
-  if(j==(sqrt(i)))
+  if(j==(int)(sqrt(i))+1)
   {
     cout<<i<<" ";
     count++;
