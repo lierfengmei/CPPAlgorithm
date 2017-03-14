@@ -34,6 +34,7 @@ bool IsLRDofTree(const int* arr,const unsigned int length)
 		i++;
 		leftMax++;
 	}
+    if(leftMax==(length-1)) return IsLRDofTree(arr,length-1);//只有左子树
 	
 	rightMax = leftMax + 1;
 	while(arr[i]>rootValue && i<=(length-2))
@@ -42,11 +43,11 @@ bool IsLRDofTree(const int* arr,const unsigned int length)
 		rightMax++;
 	}
 
-	if(leftMax==-1 && rightMax==(length-2)) return IsLRDofTree(arr,length-1);
-	if(leftMax==(length-2) && rightMax==(length-1)) return IsLRDofTree(arr,length-1);
+	if(leftMax==-1 && rightMax==(length-1)) return IsLRDofTree(arr,length-1);//只有右子树
+//	if(leftMax==(length-2) && rightMax==(length-1)) return IsLRDofTree(arr,length-1);
 //	if(rightMax==(length-1) || leftMax==-1) 
-	if(rightMax!=(length-2)) return false;
-    return IsLRDofTree(arr,leftMax)&&IsLRDofTree(arr+leftMax+1,length-1-leftMax);
+	if(rightMax!=(length-1)) return false;
+    return IsLRDofTree(arr,leftMax+1)&&IsLRDofTree(arr+leftMax+1,length-2-leftMax);
 
 /*
 
