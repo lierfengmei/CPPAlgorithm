@@ -17,7 +17,7 @@ void SubSubPrint(int length,map<char,int> charNumberMap,map<char,int>::iterator 
 
 //　需要考虑的情况：１空格　2相同的字符。
 //　step1:使用map 统计字符串种类，和字符串个数。
-//  step2:  　
+//  step2:字符串按顺序打印  　
 void PrintPermutation(char *pString)
 {
   map<char,int> charNumberMap;
@@ -64,31 +64,27 @@ void SubPrintPermutation(int length,map<char,int> charNumberMap,vector<char> vec
 
   map<char,int>::iterator iter = charNumberMap.begin();
 
-  cout<<"a's number is:"<<charNumberMap['a']<<endl;
-  getchar();
-
   while(iter!=charNumberMap.end())
   {
     if(iter->second>0) 
     {
-      /*
-      iter->second--;
-      vec.push_back(iter->first);
-      SubPrintPermutation(length-1,charNumberMap,vec);
-  */
       SubSubPrint(length,charNumberMap,iter,vec);
     }
     iter++;
   }
 }
 
+
 void SubSubPrint(int length,map<char,int> charNumberMap,map<char,int>::iterator iter,vector<char> vec)
 {
   length--;
-  iter->second--;
+  charNumberMap[iter->first]--;//这个地方切忌用iter->second--；上次出ＢＵＧ就是因为这样。
+  //iter->second returns a COPY of the second object! so changes cannot be saved!
+  
   vec.push_back(iter->first);
   SubPrintPermutation(length,charNumberMap,vec);
 }
+
 
 int main()
 {
@@ -97,8 +93,8 @@ int main()
 
   getchar();
 
-//  char pString2[]="aabcd";
-//  PrintPermutation(pString2);
+  char pString2[]="aabcd";
+  PrintPermutation(pString2);
 
   return 0;
 }
